@@ -1,0 +1,112 @@
+import java.util.Scanner;
+
+public class Main {
+    private static Scanner gir;
+    public static String girisdurum = "";
+    public static float kartbakiye = 500;
+    public static String kartsahip = "Sedatefe Altinkeser";
+    public static String sahipyas = "21";
+    public static String SubeAdi = "Balcova";
+                
+    private static void hosgeldiniz() {
+        
+            String kartsifresi = "1234";
+            
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Maranti BBAA bankasina hos geldiniz. Lutfen kart sifrenizi giriniz: ");
+            String ksifre = scan.nextLine();
+        
+                if (ksifre.equals(kartsifresi)) {
+                System.out.println("Hos geldin " + kartsahip + " > Mevcut bakiyeniz: " + kartbakiye + " TL");
+                girisdurum = "Basarili";     
+                }
+                else{         
+                System.out.println("Yanlis veya hatali tuslama yaptiniz."); 
+                girisdurum = "Basarisiz";               
+                }              
+    }
+
+    public static void main(String[] args) {
+        
+       hosgeldiniz();
+       if(girisdurum == "Basarili") {
+           tuslama();
+           
+       }
+       
+       
+    }
+    
+    private static void tuslama(){
+        int secim;
+        System.out.println("------- Lutfen bir secim yapiniz ------");
+        System.out.println("Para Cekmek Icin 1");
+        System.out.println("Para Yatirmak Icin 2");
+        System.out.println("Kart Bilgileri ve Bakiyesini Goruntulemek Icin 3");
+        System.out.println("Cikmak Icin 4");
+        
+        gir = new Scanner(System.in);
+        secim = gir.nextInt();
+        
+        switch(secim){
+            case 1: 
+                float paracek;
+                System.out.println("Lutfen cekmek istediginiz miktari giriniz:");
+                paracek = gir.nextFloat();
+                
+                if ( kartbakiye == 0 || paracek > kartbakiye){
+                    System.out.println("Yetersiz bakiye saptandi.");
+                    islem();
+                }
+                else{
+                    kartbakiye = kartbakiye - paracek;  
+                    System.out.println("Para cekme islemi basarili. Yeni bakiyeniz: " + kartbakiye + " TL.");
+                    islem();
+                }
+            break;
+                
+            case 2:
+                float parayatir;
+                System.out.println("Lutfen yatirmak istediniz miktari giriniz:");
+                parayatir = gir.nextFloat();
+                
+                kartbakiye = parayatir + kartbakiye;
+                System.out.println("Para yatirma islemi basarili! Yeni bakiyeniz: " + kartbakiye + " TL.");
+                islem();
+            break;
+            
+            case 3:
+                System.out.println("Ad-Soyad: " + kartsahip );
+                System.out.println("Yasiniz: " + sahipyas );
+                System.out.println("Sube Adi: " + SubeAdi );
+                System.out.println("Kart Bakiyesi: " + kartbakiye);
+                islem();
+            break;
+            
+            case 4:
+                System.out.println("Basariyla cikis yapiliyor, kartinizi aliniz. Maranti BBAA iyi gunler diler.");             
+            break;
+        }
+        
+        
+        
+    }
+    
+    private static void islem() {
+        int islem;
+        System.out.println("Baska bir islem yapmak istiyor musunuz? Istiyorsaniz 1 istemiyorsaniz 2.");
+        islem = gir.nextInt();
+        
+        switch(islem){
+            case 1:
+                tuslama();
+            break;
+            
+            case 2:
+                System.out.println("Basariyla cikis yapiliyor, kartinizi aliniz. Maranti BBAA iyi gunler diler");
+                break;
+        }
+        
+    }
+    
+}
